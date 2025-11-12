@@ -1,2 +1,0 @@
-import * as React from 'react'
-export function Sheet(p:any){return <div {...p}/>}export function SheetTrigger(p:any){return <button {...p}/>}export function SheetContent(p:any){return <div {...p}/>}export function SheetHeader(p:any){return <div {...p}/>}export function SheetTitle(p:any){return <div {...p}/>}
