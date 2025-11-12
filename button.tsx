@@ -1,1 +1,0 @@
-export function Button({ children, ...props }: any) { return <button {...props} className='px-3 py-2 rounded bg-sky-600 text-white hover:bg-sky-700'>{children}</button> }
