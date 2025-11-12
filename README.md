@@ -1,1 +1,0 @@
-Listo para subir a la rama 'principal'. Sigue los pasos en la conversación para publicar en GitHub Pages.
