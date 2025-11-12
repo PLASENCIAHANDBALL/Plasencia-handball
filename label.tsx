@@ -1,1 +1,0 @@
-export function Label({ children }: any) { return <label className='text-sm font-medium text-slate-700'>{children}</label> }
