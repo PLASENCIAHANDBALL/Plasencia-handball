@@ -1,44 +1,41 @@
-name: Deploy Vite to GitHub Pages
+name: Deploy to GitHub Pages (static)
 
 on:
   push:
-    branches: [ "main" ]
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
+      - name: Prepare public folder (ensure index.html at root)
+        run: |
+          # create public folder and copy static site files there
+          rm -rf public
+          mkdir -p public
+          # Copy typical static files - ajusta si tus archivos están en otra carpeta
+          cp -n index.html public/ || true
+          cp -n styles.css public/ || true
+          cp -n app.js public/ || true
+          # If your build output uses a folder like dist or build, copy it:
+          if [ -d "dist" ]; then cp -r dist/* public/; fi
+          if [ -d "build" ]; then cp -r build/* public/; fi
+          # show contents for debugging
+          ls -la public || true
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v1
         with:
-          node-version: 18
+          path: public
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build project
-        run: npm run build
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./dist
-
-  deploy:
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
-
-    steps:
       - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v1
