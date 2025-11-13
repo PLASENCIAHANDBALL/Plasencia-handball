@@ -1,1 +1,44 @@
-<!doctype html><html><head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><title>Plasencia Handball</title></head><body><div id="root"></div><script type="module" src="/src/main.tsx"></script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Plasencia Handball</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="app">
+    <header class="hero">
+      <h1>Plasencia Handball · Gestión rápida</h1>
+      <div class="admin-badge">Visitante</div>
+    </header>
+
+    <main class="container">
+      <section class="card">
+        <h2>Equipos</h2>
+        <p>Listado de equipos y categorías</p>
+        <div class="team">
+          <div class="logo">PH</div>
+          <div class="meta"><strong>Plasencia HB</strong><br/><small>Juvenil Femenino</small></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Partidos próximos</h2>
+        <ul class="matches">
+          <li><time>16/11/2025 11:30</time> — <strong>Plasencia HB</strong> vs <strong>Coria A</strong> • Pabellón A</li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <h2>Directos</h2>
+        <p>No hay directos activos.</p>
+      </section>
+    </main>
+
+    <footer class="footer">Hecho con ❤️ para torneos de balonmano. Datos guardados localmente.</footer>
+  </div>
+
+  <script src="app.js" defer></script>
+</body>
+</html>
