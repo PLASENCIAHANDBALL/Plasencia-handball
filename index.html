@@ -10,35 +10,33 @@
   <div id="app">
     <header class="hero">
       <h1>Plasencia Handball · Gestión rápida</h1>
-      <div class="admin-badge">Visitante</div>
+      <div class="controls">
+        <button id="teamsBtn" class="btn">Equipos</button>
+        <button id="podioBtn" class="btn">Podio</button>
+        <button id="streamsBtn" class="btn">Directos</button>
+        <button id="adminToggle" class="btn ghost">Entrar Admin</button>
+        <span id="adminBadge" class="admin-badge" style="display:none">Admin</span>
+      </div>
     </header>
 
     <main class="container">
-      <section class="card">
-        <h2>Equipos</h2>
-        <p>Listado de equipos y categorías</p>
-        <div class="team">
-          <div class="logo">PH</div>
-          <div class="meta"><strong>Plasencia HB</strong><br/><small>Juvenil Femenino</small></div>
-        </div>
-      </section>
-
-      <section class="card">
-        <h2>Partidos próximos</h2>
-        <ul class="matches">
-          <li><time>16/11/2025 11:30</time> — <strong>Plasencia HB</strong> vs <strong>Coria A</strong> • Pabellón A</li>
-        </ul>
-      </section>
-
-      <section class="card">
-        <h2>Directos</h2>
-        <p>No hay directos activos.</p>
+      <section id="content" class="card">
+        <h2>Bienvenido</h2>
+        <p>Usa los botones arriba para navegar: <strong>Equipos</strong>, <strong>Podio</strong>, <strong>Directos</strong>.</p>
       </section>
     </main>
 
-    <footer class="footer">Hecho con ❤️ para torneos de balonmano. Datos guardados localmente.</footer>
+    <footer class="footer">Hecho con ❤️ — Datos guardados localmente en tu navegador.</footer>
   </div>
 
-  <script src="app.js" defer></script>
+  <!-- Admin modal -->
+  <div id="modal" class="modal hidden">
+    <div class="modal-inner">
+      <button id="closeModal" class="modal-close">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+
+<script src="app.js" defer></script>
 </body>
 </html>
