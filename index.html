@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Plasencia Handball – Gestión</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Plasencia Handball – Debug</title>
+<link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <header class="header">
@@ -44,7 +44,7 @@
       <div class="modal-content">
         <h3>Acceso administrador</h3>
         <input id="adminPassword" type="password" placeholder="Contraseña">
-        <div class="modal-actions">
+        <div style="margin-top:8px">
           <button id="cancelLogin" class="cancel-btn">Cancelar</button>
           <button id="submitLogin" class="ok-btn">Entrar</button>
         </div>
@@ -56,9 +56,7 @@
     <section id="adminSection" class="card hidden" aria-hidden="true">
       <div class="admin-top">
         <h2>Panel Administrador</h2>
-        <div>
-          <button id="btnLogout" class="cancel-btn">Salir Admin</button>
-        </div>
+        <div><button id="btnLogout" class="cancel-btn">Salir Admin</button></div>
       </div>
 
       <div class="admin-columns">
@@ -79,21 +77,18 @@
               <input id="teamPhoto" type="file" accept="image/*">
             </label>
             <div id="photoPreviewContainer" class="photo-preview hidden"><p>Previsualización:</p><img id="photoPreview" alt="preview"></div>
-            <div class="form-row">
+            <div style="margin-top:8px">
               <button type="submit" class="save-btn" id="saveTeamBtn">Guardar equipo</button>
               <button type="button" id="cancelEditTeam" class="cancel-btn hidden">Cancelar edición</button>
             </div>
           </form>
-
           <hr>
           <h4>Equipos existentes</h4>
           <div id="adminTeamsList"></div>
         </div>
-
         <div class="admin-column">
           <h3>Partidos — Crear / Editar</h3>
           <form id="formAddMatch" class="admin-form">
-            <input type="hidden" id="editingMatchId" value="">
             <label>Equipo local
               <select id="matchHome"></select>
             </label>
@@ -106,51 +101,17 @@
             <label>Pabellón / Pista
               <input id="matchVenue" placeholder="Pabellón A, Pista 1">
             </label>
-            <label>Goles equipo local (opcional)
-              <input id="matchHomeGoals" type="number" min="0" placeholder="0">
-            </label>
-            <label>Goles equipo visitante (opcional)
-              <input id="matchAwayGoals" type="number" min="0" placeholder="0">
-            </label>
-            <label>Resultado (opcional) formato local:visitante
-              <input id="matchResult" placeholder="2:1">
-            </label>
-            <div class="form-row">
-              <button type="submit" class="save-btn" id="saveMatchBtn">Guardar partido</button>
-              <button type="button" id="cancelEditMatch" class="cancel-btn hidden">Cancelar edición</button>
-            </div>
-          </form>
-
-          <hr>
-          <h4>Partidos existentes</h4>
-          <div id="adminMatchesList"></div>
-
-          <hr>
-          <h3>Directos</h3>
-          <form id="formDirectos" class="admin-form">
-            <label>URL del directo
-              <input id="directoUrl" placeholder="https://...">
-            </label>
             <div style="margin-top:8px">
-              <button type="submit" class="save-btn">Guardar URL</button>
-              <button type="button" id="deleteDirecto" class="cancel-btn">Eliminar URL</button>
+              <button type="submit" class="save-btn" id="saveMatchBtn">Guardar partido</button>
             </div>
           </form>
-
-          <hr>
-          <h3>Backup / Restaurar</h3>
-          <div style="display:flex;gap:8px;align-items:center">
-            <button id="exportData" class="save-btn">Exportar JSON</button>
-            <input id="importFile" type="file" accept="application/json">
-          </div>
-
         </div>
       </div>
     </section>
 
   </main>
 
-  <script>window.APP_ADMIN_PASSWORD = "Pl4s3nc1a!Adm1n#2025";</script>
-  <script src="app.js"></script>
+<script>window.APP_ADMIN_PASSWORD = "Pl4s3nc1a!Adm1n#2025";</script>
+<script src="app.js"></script>
 </body>
 </html>
