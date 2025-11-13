@@ -14,6 +14,20 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/co
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Play, Plus, Save, Settings, Upload, Download, Trash2, Link as LinkIcon, ExternalLink, Calendar, Users2, Trophy, Video, Lock, Unlock, Layers, LayoutGrid, Image as ImageIcon } from "lucide-react";
 import { motion } from "framer-motion";
+import BackgroundArt from "@/components/BackgroundArt";
+import EventManager from "@/components/EventManager";
+import TeamForm from "@/components/TeamForm";
+import TeamOptions from "@/components/TeamOptions";
+import TeamChip from "@/components/TeamChip";
+import TeamInline from "@/components/TeamInline";
+import MatchForm from "@/components/MatchForm";
+import MatchesTable from "@/components/MatchesTable";
+import GroupsView from "@/components/GroupsView";
+import StreamEmbed from "@/components/StreamEmbed";
+import Standings from "@/components/Standings";
+import PhaseManager from "@/components/PhaseManager";
+import PasswordChanger from "@/components/PasswordChanger";
+import DevTests from "@/components/DevTests";
 
 // ===== Config básica =====
 const CATEGORIES = [
