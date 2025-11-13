@@ -1,21 +1,21 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Plasencia Handball - Admin</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Plasencia Handball – Gestión</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <header class="header">
   <h1 class="title">Plasencia Handball</h1>
-  <nav class="nav">
-    <button class="nav-btn" id="btnEquipos" title="Equipos">E</button>
-    <button class="nav-btn" id="btnPartidos" title="Partidos">P</button>
-    <button class="nav-btn" id="btnPodio" title="Podio">D</button>
-    <button class="nav-btn" id="btnDirectos" title="Directos">L</button>
-    <button class="nav-btn" id="btnClasificacion" title="Clasificación">C</button>
-    <button class="nav-btn admin-btn" id="btnEntrarAdmin" title="Admin">A</button>
+  <nav class="nav" aria-label="Navegación principal">
+    <button class="nav-btn" id="btnEquipos">Equipos</button>
+    <button class="nav-btn" id="btnPartidos">Partidos</button>
+    <button class="nav-btn" id="btnPodio">Podio</button>
+    <button class="nav-btn" id="btnDirectos">Directos</button>
+    <button class="nav-btn" id="btnClasificacion">Clasificación</button>
+    <button class="nav-btn admin-btn" id="btnEntrarAdmin">Entrar Admin</button>
   </nav>
 </header>
 
@@ -26,20 +26,25 @@
   </section>
 
   <section id="matchesView" class="card view hidden">
-    <h2>Partidos próximos / Resultado</h2>
+    <h2>Partidos próximos</h2>
     <div id="matchList"></div>
+    <p class="summary">En modo administrador puedes crear y editar partidos.</p>
   </section>
 
   <section id="podioView" class="card view hidden"><h2>Podio</h2></section>
+
   <section id="directosView" class="card view hidden">
     <h2>Directos</h2>
     <div id="directosDisplay"></div>
+    <p class="summary">En modo admin puedes cambiar la URL del directo.</p>
   </section>
+
   <section id="clasificacionView" class="card view hidden"><h2>Clasificación</h2></section>
 
-  <div id="adminModal" class="modal hidden">
+  <!-- Login modal -->
+  <div id="adminModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="adminModalTitle">
     <div class="modal-content">
-      <h3>Modo Admin</h3>
+      <h3 id="adminModalTitle">Acceso administrador</h3>
       <input id="adminPassword" type="password" placeholder="Contraseña">
       <div class="modal-actions">
         <button id="cancelLogin" class="cancel-btn">Cancelar</button>
@@ -49,80 +54,102 @@
     </div>
   </div>
 
-  <section id="adminSection" class="card hidden">
-    <div style="display:flex;justify-content:space-between;align-items:center">
-      <h2>Panel administrador</h2>
+  <!-- Admin panel (hidden until login) -->
+  <section id="adminSection" class="card hidden" aria-hidden="true">
+    <div class="admin-top">
+      <h2>Panel Administrador</h2>
       <div>
         <button id="btnLogout" class="cancel-btn">Salir Admin</button>
       </div>
     </div>
 
-    <details open>
-      <summary>Crear / editar / eliminar equipos</summary>
-      <form id="formAddTeam" class="admin-form">
-        <input type="hidden" id="editingTeamId" value="">
-        <label>Nombre del equipo<input id="teamName" required></label>
-        <label>Club / Ciudad<input id="teamClub"></label>
-        <label>Categorías<input id="teamCategories"></label>
-        <label>Imagen (archivo o foto)<input id="teamPhoto" type="file" accept="image/*"></label>
-        <div id="photoPreviewContainer" class="hidden"><p>Previsualización:</p><img id="photoPreview"></div>
-        <div style="margin-top:10px">
-          <button type="submit" class="save-btn" id="saveTeamBtn">Guardar equipo</button>
-          <button type="button" id="cancelEditTeam" class="cancel-btn hidden">Cancelar edición</button>
-        </div>
-      </form>
-    </details>
+    <div class="admin-columns">
+      <div class="admin-column">
+        <h3>Equipos — Crear / Editar</h3>
+        <form id="formAddTeam" class="admin-form">
+          <input type="hidden" id="editingTeamId" value="">
+          <label>Nombre del equipo
+            <input id="teamName" required>
+          </label>
+          <label>Club / Ciudad
+            <input id="teamClub">
+          </label>
+          <label>Categorías (coma separadas)
+            <input id="teamCategories">
+          </label>
+          <label>Imagen (archivo)
+            <input id="teamPhoto" type="file" accept="image/*">
+          </label>
+          <div id="photoPreviewContainer" class="hidden"><p>Previsualización:</p><img id="photoPreview"></div>
+          <div class="form-row">
+            <button type="submit" class="save-btn" id="saveTeamBtn">Guardar equipo</button>
+            <button type="button" id="cancelEditTeam" class="cancel-btn hidden">Cancelar edición</button>
+          </div>
+        </form>
 
-    <details>
-      <summary>Crear / editar / eliminar partido</summary>
-      <form id="formAddMatch" class="admin-form">
-        <input type="hidden" id="editingMatchId" value="">
-        <label>Equipo local
-          <select id="matchHome"></select>
-        </label>
-        <label>Equipo visitante
-          <select id="matchAway"></select>
-        </label>
-        <label>Fecha y hora
-          <input id="matchDate" type="datetime-local">
-        </label>
-        <label>Resultado (opcional) - formato: local:visitante
-          <input id="matchResult" placeholder="2:1">
-        </label>
-        <div style="margin-top:10px">
-          <button type="submit" class="save-btn" id="saveMatchBtn">Guardar partido</button>
-          <button type="button" id="cancelEditMatch" class="cancel-btn hidden">Cancelar edición</button>
-        </div>
-      </form>
-    </details>
-
-    <details>
-      <summary>Editar URL de Directos</summary>
-      <form id="formDirectos" class="admin-form">
-        <label>URL del directo<input id="directoUrl" placeholder="https://..."></label>
-        <div style="margin-top:10px"><button type="submit" class="save-btn">Guardar URL</button></div>
-      </form>
-    </details>
-
-    <details>
-      <summary>Export / Import (backup)</summary>
-      <div style="margin-top:8px">
-        <button id="exportData" class="save-btn">Exportar datos (JSON)</button>
-        <input id="importFile" type="file" accept="application/json" style="display:inline-block;margin-left:8px">
+        <hr>
+        <h4>Equipos existentes (clic en Editar para facilitar edición)</h4>
+        <div id="adminTeamsList"></div>
       </div>
-    </details>
 
-    <details>
-      <summary>Datos guardados</summary>
-      <div style="margin-top:8px">
-        <button id="clearAll" class="cancel-btn">Eliminar todo (equipos, partidos, directos)</button>
+      <div class="admin-column">
+        <h3>Partidos — Crear / Editar</h3>
+        <form id="formAddMatch" class="admin-form">
+          <input type="hidden" id="editingMatchId" value="">
+          <label>Equipo local
+            <select id="matchHome"></select>
+          </label>
+          <label>Equipo visitante
+            <select id="matchAway"></select>
+          </label>
+          <label>Fecha y hora
+            <input id="matchDate" type="datetime-local">
+          </label>
+          <label>Resultado (opcional) formato local:visitante
+            <input id="matchResult" placeholder="2:1">
+          </label>
+          <div class="form-row">
+            <button type="submit" class="save-btn" id="saveMatchBtn">Guardar partido</button>
+            <button type="button" id="cancelEditMatch" class="cancel-btn hidden">Cancelar edición</button>
+          </div>
+        </form>
+
+        <hr>
+        <h4>Partidos existentes</h4>
+        <div id="adminMatchesList"></div>
+
+        <hr>
+        <h3>Directos</h3>
+        <form id="formDirectos" class="admin-form">
+          <label>URL del directo
+            <input id="directoUrl" placeholder="https://...">
+          </label>
+          <div style="margin-top:8px">
+            <button type="submit" class="save-btn">Guardar URL</button>
+          </div>
+        </form>
+
+        <hr>
+        <h3>Backup / Restaurar</h3>
+        <div style="display:flex;gap:8px;align-items:center">
+          <button id="exportData" class="save-btn">Exportar JSON</button>
+          <input id="importFile" type="file" accept="application/json">
+        </div>
+
+        <hr>
+        <div style="margin-top:8px">
+          <button id="clearAll" class="cancel-btn">Eliminar todo (equipos, partidos, directos)</button>
+        </div>
       </div>
-    </details>
-
+    </div>
   </section>
 
 </main>
 
+<script>
+  // expose password constant to app.js loader
+  window.APP_ADMIN_PASSWORD = "Pl4s3nc1a!Adm1n#2025";
+</script>
 <script src="app.js"></script>
 </body>
 </html>

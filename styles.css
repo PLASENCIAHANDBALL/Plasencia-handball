@@ -1,90 +1,42 @@
-:root {
-  --blue-bg: #dceeff;
-  --blue-card: #ffffff;
-  --text-dark: #0a1a2a;
-  --button-blue: #5ab0ff;
-  --button-admin: #ffb84d;
+/* Styles for final app */
+:root{
+  --bg: #e8f5ff;
+  --card: #ffffff;
+  --text: #04263b;
   --muted: #5b6b78;
+  --accent: #4aa3ff;
+  --admin-accent: #ff9b3c;
 }
-
-body {
-  background: linear-gradient(180deg, #dceeff, #cfe8ff);
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 22px;
-  color: var(--text-dark);
-}
-
-.header {
-  text-align: center;
-  margin-bottom: 14px;
-}
-
-.title {
-  margin: 0 0 12px;
-  font-size: 32px;
-  font-weight: 900;
-}
-
-.nav {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.nav-btn {
-  background: var(--button-blue);
-  border: none;
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-  font-size: 13px;
-  display:flex;align-items:center;justify-content:center;
-}
-
-.nav-btn[title] { font-size:12px; padding:0 6px; width:56px; height:56px; }
-
-.admin-btn {
-  background: var(--button-admin);
-  width:56px;height:56px;border-radius:50%;
-}
-
-.nav-btn:hover { transform: translateY(-4px); transition: 0.12s; box-shadow: 0 6px 18px rgba(0,0,0,0.12); }
-
-.card {
-  background: var(--blue-card);
-  padding: 18px;
-  margin-top: 18px;
-  border-radius: 14px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-}
-
-.hidden { display: none !important; }
-
-.teams { display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; }
-.teamCard { background:#eef7ff; padding:10px; border-radius:12px; display:flex; gap:10px; align-items:center; min-width:220px; }
-.teamCard img { width:70px; height:70px; border-radius:10px; object-fit:cover; }
-
-.match-item { border-radius:10px; padding:10px; background:#f4fbff; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
-.match-left { display:flex; gap:12px; align-items:center; }
-
-.small-btn { background:transparent; border:1px solid rgba(0,0,0,0.06); padding:6px 8px; border-radius:8px; cursor:pointer; }
-.delete-btn { background:#ffdddd; border:1px solid #ffb6b6; }
-
-.admin-form label { display:block; margin-top:8px; color:var(--muted); }
-.admin-form input, .admin-form select { width:100%; padding:8px; margin-top:6px; border-radius:8px; border:1px solid #e6eef6; }
-
-.modal { position: fixed; inset:0; background: rgba(0,0,0,0.45); display:flex; justify-content:center; align-items:center; }
-.modal-content { background:white; padding:18px; border-radius:12px; width:320px; }
-.modal-actions { display:flex; justify-content:space-between; margin-top:10px; }
-.cancel-btn { background:lightgray; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
-.ok-btn { background:var(--button-blue); color:white; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
-.save-btn { background:var(--button-blue); color:white; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; margin-top:8px; }
-
-.error { color:red; margin-top:8px; }
-
-.summary { margin-top:10px; font-size:14px; color:var(--muted); }
+*{box-sizing:border-box}
+body{ background: linear-gradient(180deg,var(--bg), #d7ecff); font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, Arial; color:var(--text); margin:0; padding:20px; }
+.header{ text-align:center; margin-bottom:14px; }
+.title{ margin:0; font-size:28px; font-weight:800; }
+.nav{ display:flex; justify-content:center; gap:10px; flex-wrap:wrap; margin-top:10px; }
+.nav-btn{ background:var(--accent); color:white; border:none; padding:10px 16px; border-radius:999px; font-weight:700; cursor:pointer; box-shadow:0 6px 18px rgba(10,38,59,0.08); }
+.nav-btn.admin-btn{ background:var(--admin-accent); color:#3a2300; }
+.nav-btn:hover{ transform:translateY(-3px); transition:0.12s; }
+.card{ background:var(--card); padding:16px; border-radius:12px; box-shadow:0 8px 30px rgba(2,6,23,0.06); margin-top:16px; max-width:1100px; margin-left:auto; margin-right:auto; }
+.view{ max-width:1100px; }
+.hidden{ display:none!important; }
+.teams{ display:flex; flex-wrap:wrap; gap:12px; margin-top:12px; }
+.teamCard{ background:#f2fbff; padding:10px; border-radius:10px; display:flex; gap:10px; align-items:center; min-width:240px; }
+.teamCard img{ width:70px; height:70px; border-radius:8px; object-fit:cover; }
+.match-item{ border-radius:10px; padding:10px; background:#f7fdff; margin-bottom:10px; display:flex; justify-content:space-between; align-items:center; }
+.match-left{ display:flex; gap:12px; align-items:center; }
+.summary{ color:var(--muted); margin-top:8px; }
+.modal{ position:fixed; inset:0; background:rgba(2,6,23,0.45); display:flex; align-items:center; justify-content:center; z-index:90; }
+.modal-content{ background:var(--card); padding:18px; border-radius:10px; width:320px; }
+.modal-content input{ width:100%; padding:8px; border-radius:8px; border:1px solid #e6f0fb; margin-top:8px; }
+.cancel-btn{ background:#efefef; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
+.ok-btn{ background:var(--accent); color:white; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
+.save-btn{ background:var(--accent); color:white; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
+.admin-top{ display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.admin-columns{ display:flex; gap:20px; margin-top:12px; flex-wrap:wrap; }
+.admin-column{ flex:1; min-width:300px; }
+.admin-form label{ display:block; margin-top:8px; color:var(--muted); }
+.admin-form input, .admin-form select{ width:100%; padding:8px; margin-top:6px; border-radius:8px; border:1px solid #e6f0fb; }
+#adminTeamsList .teamRow, #adminMatchesList .matchRow{ display:flex; justify-content:space-between; gap:8px; align-items:center; padding:8px; border-radius:8px; background:#fbfeff; margin-top:8px; }
+.small-btn{ background:transparent; border:1px solid rgba(0,0,0,0.06); padding:6px 8px; border-radius:8px; cursor:pointer; }
+.delete-btn{ background:#ffefef; border:1px solid #ffd0d0; }
+.photo-preview img{ max-width:140px; border-radius:8px; margin-top:8px; }
+@media (max-width:900px){ .admin-columns{ flex-direction:column; } }
