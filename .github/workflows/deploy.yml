@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build and deploy to GitHub Pages
 
 on:
   push:
@@ -11,23 +11,23 @@ permissions:
   id-token: write
 
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - name: Use Node.js 18
         uses: actions/setup-node@v4
         with:
           node-version: 18
           cache: 'npm'
 
       - name: Install dependencies
+        # npm ci requiere package-lock.json en el repo (recomendado)
         run: npm ci
 
       - name: Build project
-        # Asegúrate de que "npm run build" exista en package.json
         run: npm run build
 
       - name: Upload artifact for GitHub Pages
@@ -36,9 +36,8 @@ jobs:
           path: ./dist
 
   deploy:
-    needs: build-and-deploy
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
-        with: {}
