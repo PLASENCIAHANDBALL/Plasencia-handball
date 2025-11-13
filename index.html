@@ -1,70 +1,102 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Plasencia Handball · Gestión rápida</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Plasencia Handball · Gestión rápida</title>
+<link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <div class="logo">PH</div>
-      <h1>Plasencia Handball · Gestión rápida</h1>
+<header class="topbar">
+  <div class="brand">
+    <div class="logo" aria-hidden="true">
+      <svg width="40" height="40" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="50" cy="50" r="48" fill="#1ea7ff"/>
+        <text x="50" y="58" font-size="34" text-anchor="middle" fill="#fff" font-family="Arial" font-weight="700">PH</text>
+      </svg>
     </div>
-    <nav class="nav">
-      <button id="btn-equipos" class="pill">Equipos</button>
-      <button id="btn-podio" class="pill">Podio</button>
-      <button id="btn-directos" class="pill">Directos</button>
-      <button id="btn-admin" class="pill outline">Entrar Admin</button>
-    </nav>
-  </header>
-
-  <main class="container">
-    <section class="card welcome">
-      <h2>Bienvenido</h2>
-      <p>Usa los botones de arriba para navegar: <strong>Equipos</strong>, <strong>Podio</strong>, <strong>Directos</strong>.</p>
-      <div id="upcoming" class="upcoming"></div>
-    </section>
-
-    <section id="content" class="card content-area">
-      <!-- Dynamic content will go here -->
-    </section>
-  </main>
-
-  <!-- Admin modal (hidden by default) -->
-  <div id="admin-modal" class="modal hidden" role="dialog" aria-hidden="true">
-    <div class="modal-box">
-      <h3>Entrar en modo administrador</h3>
-      <input id="admin-password" type="password" placeholder="Contraseña del administrador" aria-label="Contraseña admin">
-      <div class="modal-actions">
-        <button id="cancel-admin" class="btn">Cancelar</button>
-        <button id="confirm-admin" class="btn primary">Entrar</button>
-      </div>
-      <p class="note">Introduce la contraseña para acceder como administrador.</p>
-    </div>
+    <h1>Plasencia Handball · Gestión rápida</h1>
   </div>
 
-  <!-- Edit modal for admin (edit next match / direct url) -->
-  <div id="edit-modal" class="modal hidden" role="dialog" aria-hidden="true">
-    <div class="modal-box">
-      <h3>Editar partido/directo</h3>
-      <label>Fecha y hora<input id="edit-datetime" type="datetime-local"></label>
-      <label>Local<input id="edit-local" type="text" placeholder="Equipo local"></label>
-      <label>Visitante<input id="edit-visitor" type="text" placeholder="Equipo visitante"></label>
-      <label>Lugar<input id="edit-place" type="text" placeholder="Pabellón"></label>
-      <label>URL directo (opcional)<input id="edit-url" type="url" placeholder="https://..."></label>
-      <div class="modal-actions">
-        <button id="cancel-edit" class="btn">Cancelar</button>
-        <button id="save-edit" class="btn primary">Guardar</button>
-      </div>
-    </div>
-  </div>
+  <nav class="navbuttons">
+    <button id="btn-equipo" class="nav-btn">Equipos</button>
+    <button id="btn-podio" class="nav-btn">Podio</button>
+    <button id="btn-directos" class="nav-btn">Directos</button>
+    <button id="btn-clasificacion" class="nav-btn">Clasificación</button>
+    <button id="btn-admin" class="nav-btn admin">Entrar Admin</button>
+  </nav>
+</header>
 
-  <footer class="footer">
-    <small>Hecho con ❤️ — Datos guardados localmente en el navegador.</small>
+<main class="container">
+  <section id="welcome" class="card">
+    <h2>Bienvenido</h2>
+    <p>Usa los botones de arriba para navegar: <strong>Equipos</strong>, <strong>Podio</strong>, <strong>Directos</strong>, <strong>Clasificación</strong>.</p>
+    <div id="nextMatches" class="next-matches"></div>
+  </section>
+
+  <section id="panel" class="card hidden" aria-live="polite">
+    <!-- Dynamic content appears here -->
+  </section>
+
+  <footer class="footer card">
+    <small>Hecho con ❤️ — Datos guardados localmente en tu navegador.</small>
   </footer>
+</main>
 
-  <script src="app.js"></script>
+<!-- Admin modal (hidden by default) -->
+<div id="adminModal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="adminTitle">
+  <div class="modal-content">
+    <h3 id="adminTitle">Entrar en modo administrador</h3>
+    <form id="adminForm">
+      <label for="adminPassword">Contraseña</label>
+      <input id="adminPassword" type="password" required placeholder="Contraseña de administrador" />
+      <div class="modal-actions">
+        <button type="button" id="adminCancel">Cancelar</button>
+        <button type="submit" id="adminEnter">Entrar</button>
+      </div>
+    </form>
+    <small class="hint">Si no conoces la contraseña pide al administrador del repositorio.</small>
+  </div>
+</div>
+
+<!-- Edit match modal -->
+<div id="editModal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <h3 id="editTitle">Editar partido</h3>
+    <form id="editForm">
+      <input name="id" type="hidden" />
+      <label>Fecha y hora<input name="date" type="datetime-local" required /></label>
+      <label>Local<input name="home" type="text" required /></label>
+      <label>Visitante<input name="away" type="text" required /></label>
+      <label>Pista<input name="venue" type="text" /></label>
+      <label>Estado<select name="status"><option value="pendiente">Pendiente</option><option value="jugado">Jugado</option></select></label>
+      <label>URL directo (opcional)<input name="liveUrl" type="url" placeholder="https://..." /></label>
+      <div class="modal-actions">
+        <button type="button" id="editCancel">Cancelar</button>
+        <button type="submit" id="editSave">Guardar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Team edit modal -->
+<div id="teamModal" class="modal hidden" role="dialog" aria-modal="true">
+  <div class="modal-content">
+    <h3 id="teamTitle">Editar / Añadir equipo</h3>
+    <form id="teamForm">
+      <input name="id" type="hidden" />
+      <label>Nombre del equipo<input name="name" type="text" required /></label>
+      <label>Categorías</label>
+      <div id="teamCategories" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:6px"></div>
+      <label>Club / Ciudad<input name="club" type="text" /></label>
+      <div class="modal-actions">
+        <button type="button" id="teamCancel">Cancelar</button>
+        <button type="submit" id="teamSave">Guardar equipo</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
