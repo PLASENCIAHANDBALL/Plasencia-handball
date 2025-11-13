@@ -1,0 +1,2 @@
+import React,{useState} from 'react'
+export default function TeamForm({onSubmit}:{onSubmit:(t:any)=>void}){const [n,setN]=useState('');const [cats,setCats]=useState<string[]>([]);return (<div className='space-y-2'><input value={n} onChange={e=>setN(e.target.value)} placeholder='Nombre' className='w-full px-3 py-2 border rounded'/><button onClick={()=>{ if(!n) return alert('Nombre'); onSubmit({name:n,categories:cats,logo:'',club:''}); setN('') }} className='px-3 py-2 bg-slate-900 text-white rounded'>Añadir</button></div>)}
