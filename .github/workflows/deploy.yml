@@ -1,31 +1,26 @@
-name: Deploy to GitHub Pages
+name: Deploy Vite to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
-
-permissions:
-  contents: read
-  pages: write
-  id-token: write
+    branches: [ "main" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
 
-      - name: Install deps
-        run: npm ci || npm i
+      - name: Install dependencies
+        run: npm install
 
-      - name: Build
+      - name: Build project
         run: npm run build
 
       - name: Upload artifact
@@ -35,12 +30,15 @@ jobs:
 
   deploy:
     needs: build
-    runs-on: ubuntu-latest
-
-    # <- Esto es lo importante: environment debe existir (nombre: github-pages)
+    permissions:
+      pages: write
+      id-token: write
     environment:
       name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
 
     steps:
       - name: Deploy to GitHub Pages
+        id: deployment
         uses: actions/deploy-pages@v4
