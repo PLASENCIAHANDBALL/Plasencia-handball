@@ -21,20 +21,30 @@
   <main>
     <section class="welcome card">
       <h2>Bienvenido</h2>
-      <p>Usa los botones de arriba para navegar: Equipos, Podio, Directos, Clasificación.</p>
-      <div id="nextMatch" class="match">16/11/2025, 11:30:00<br>Plasencia HB vs Coria A · Pabellón A</div>
+      <p>Usa los botones de arriba para navegar.</p>
     </section>
 
-    <!-- Teams list -->
     <section id="teamsView" class="card">
       <h2>Equipos</h2>
-      <div id="teamsContainer" class="teams-grid">
-        <!-- renderTeams() insertará aquí las tarjetas -->
-      </div>
+      <div id="teamsContainer"></div>
     </section>
 
-    <!-- Modal de login admin -->
-    <div id="adminModal" class="modal hidden" role="dialog" aria-modal="true">
+    <section id="podioView" class="card hidden">
+      <h2>Podio</h2>
+      <p>Aquí aparecerá el podio.</p>
+    </section>
+
+    <section id="directosView" class="card hidden">
+      <h2>Directos</h2>
+      <p>Aquí podrás poner el directo.</p>
+    </section>
+
+    <section id="clasificacionView" class="card hidden">
+      <h2>Clasificación</h2>
+      <p>Aquí aparecerá la clasificación.</p>
+    </section>
+
+    <div id="adminModal" class="modal hidden">
       <div class="modal-content">
         <h3>Acceso administrador</h3>
         <input id="adminPassword" type="password" placeholder="Contraseña de administrador">
@@ -46,40 +56,21 @@
       </div>
     </div>
 
-    <!-- Sección administrador (oculta por defecto) -->
-    <section id="adminSection" class="admin-section hidden" aria-hidden="true">
+    <section id="adminSection" class="admin-section hidden">
       <h2>Modo administrador</h2>
-
-      <!-- Ejemplo: añadir equipo -->
       <form id="formAddTeam">
-        <label>Nombre del equipo
-          <input id="teamName" type="text" required>
-        </label>
-
-        <label>Club / Ciudad
-          <input id="teamClub" type="text">
-        </label>
-
-        <label>Categorías (separadas por coma)
-          <input id="teamCategories" type="text">
-        </label>
-
-        <label>Foto del equipo (opcional)
-          <input id="teamPhoto" type="file" accept="image/*" capture="environment">
-        </label>
-
+        <label>Nombre del equipo<input id="teamName"></label>
+        <label>Club/Ciudad<input id="teamClub"></label>
+        <label>Categorías<input id="teamCategories"></label>
+        <label>Foto<input id="teamPhoto" type="file" accept="image/*"></label>
         <div id="photoPreviewContainer" style="display:none">
-          <p>Previsualización:</p>
-          <img id="photoPreview" alt="Preview" style="max-width:160px; border-radius:8px;">
+          <img id="photoPreview" style="max-width:150px;">
         </div>
-
         <div class="form-actions">
-          <button type="button" id="cancelAddTeam">Cancelar</button>
-          <button type="submit" id="saveTeam">Guardar equipo</button>
+          <button type="submit">Guardar equipo</button>
         </div>
       </form>
     </section>
-
   </main>
 
   <script src="app.js"></script>
