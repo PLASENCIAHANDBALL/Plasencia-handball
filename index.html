@@ -26,7 +26,7 @@
     </section>
 
     <section id="matchesView" class="card view hidden">
-      <h2>Partidos próximos</h2>
+      <h2>Partidos</h2>
       <div id="matchList"></div>
     </section>
 
@@ -39,7 +39,7 @@
 
     <section id="clasificacionView" class="card view hidden"><h2>Clasificación</h2></section>
 
-    <!-- admin modal (hidden by default) -->
+    <!-- admin modal -->
     <div id="adminModal" class="modal hidden" role="dialog" aria-modal="true">
       <div class="modal-content">
         <h3>Acceso administrador</h3>
@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <!-- Admin panel (hidden until login) -->
+    <!-- Admin panel -->
     <section id="adminSection" class="card hidden" aria-hidden="true">
       <div class="admin-top">
         <h2>Panel Administrador</h2>
@@ -106,6 +106,12 @@
             <label>Pabellón / Pista
               <input id="matchVenue" placeholder="Pabellón A, Pista 1">
             </label>
+            <label>Goles equipo local (opcional)
+              <input id="matchHomeGoals" type="number" min="0" placeholder="0">
+            </label>
+            <label>Goles equipo visitante (opcional)
+              <input id="matchAwayGoals" type="number" min="0" placeholder="0">
+            </label>
             <label>Resultado (opcional) formato local:visitante
               <input id="matchResult" placeholder="2:1">
             </label>
@@ -144,9 +150,7 @@
 
   </main>
 
-  <!-- define password (easy to change) -->
   <script>window.APP_ADMIN_PASSWORD = "Pl4s3nc1a!Adm1n#2025";</script>
-  <!-- load main JS at end of body -->
   <script src="app.js"></script>
 </body>
 </html>
