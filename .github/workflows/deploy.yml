@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build and deploy to GitHub Pages
 
 on:
   push:
@@ -13,6 +13,7 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -22,15 +23,15 @@ jobs:
         with:
           node-version: '18'
 
-      - name: Install dependencies
+      - name: Install dependencies (try ci, fallback to install)
         run: |
-          npm config set unsafe-perm true
+          # intentamos la instalación estricta (rápida si tienes lockfile correcto)
           npm ci || npm install --legacy-peer-deps
 
       - name: Build project
         run: npm run build
 
-      - name: Upload artifact
+      - name: Upload artifact (Pages)
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
