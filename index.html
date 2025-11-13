@@ -103,6 +103,9 @@
             <label>Fecha y hora
               <input id="matchDate" type="datetime-local">
             </label>
+            <label>Pabellón / Pista
+              <input id="matchVenue" placeholder="Pabellón A, Pista 1">
+            </label>
             <label>Resultado (opcional) formato local:visitante
               <input id="matchResult" placeholder="2:1">
             </label>
@@ -124,6 +127,7 @@
             </label>
             <div style="margin-top:8px">
               <button type="submit" class="save-btn">Guardar URL</button>
+              <button type="button" id="deleteDirecto" class="cancel-btn">Eliminar URL</button>
             </div>
           </form>
 
@@ -134,10 +138,6 @@
             <input id="importFile" type="file" accept="application/json">
           </div>
 
-          <hr>
-          <div style="margin-top:8px">
-            <button id="clearAll" class="cancel-btn">Eliminar todo (equipos, partidos, directos)</button>
-          </div>
         </div>
       </div>
     </section>
