@@ -36,6 +36,11 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+
+    # <- Esto es lo importante: environment debe existir (nombre: github-pages)
+    environment:
+      name: github-pages
+
     steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
