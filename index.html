@@ -7,8 +7,9 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <header>
-    <h1>Plasencia Handball · Gestión rápida</h1>
+  <header class="site-header">
+    <div class="logo">PH</div>
+    <h1 class="title">Plasencia Handball · Gestión rápida</h1>
     <nav class="main-nav">
       <button class="nav-btn" id="btnEquipos">Equipos</button>
       <button class="nav-btn" id="btnPodio">Podio</button>
@@ -21,56 +22,83 @@
   <main>
     <section class="welcome card">
       <h2>Bienvenido</h2>
-      <p>Usa los botones de arriba para navegar.</p>
+      <p>Usa los botones de arriba para navegar: Equipos, Podio, Directos, Clasificación.</p>
+      <div class="next-match">16/11/2025, 11:30:00<br>Plasencia HB vs Coria A · Pabellón A</div>
+      <p class="made-with">Hecho con ❤️ — Datos guardados localmente en tu navegador.</p>
     </section>
 
-    <section id="teamsView" class="card">
+    <!-- Views -->
+    <section id="teamsView" class="card view">
       <h2>Equipos</h2>
-      <div id="teamsContainer"></div>
+      <div id="teamsContainer" class="teams-grid"></div>
     </section>
 
-    <section id="podioView" class="card hidden">
+    <section id="podioView" class="card view hidden">
       <h2>Podio</h2>
-      <p>Aquí aparecerá el podio.</p>
+      <div id="podioContent">Aquí aparecerá el podio.</div>
     </section>
 
-    <section id="directosView" class="card hidden">
+    <section id="directosView" class="card view hidden">
       <h2>Directos</h2>
-      <p>Aquí podrás poner el directo.</p>
+      <div id="directosContent">Añade aquí la URL del directo (visible sin entrar como admin).</div>
     </section>
 
-    <section id="clasificacionView" class="card hidden">
+    <section id="clasificacionView" class="card view hidden">
       <h2>Clasificación</h2>
-      <p>Aquí aparecerá la clasificación.</p>
+      <div id="clasificacionContent">La clasificación aparecerá aquí.</div>
     </section>
 
-    <div id="adminModal" class="modal hidden">
+    <!-- Modal admin -->
+    <div id="adminModal" class="modal hidden" role="dialog" aria-modal="true">
       <div class="modal-content">
         <h3>Acceso administrador</h3>
         <input id="adminPassword" type="password" placeholder="Contraseña de administrador">
         <div class="modal-actions">
-          <button id="cancelLogin">Cancelar</button>
-          <button id="submitLogin">Entrar</button>
+          <button id="cancelLogin" class="btn-ghost">Cancelar</button>
+          <button id="submitLogin" class="btn-primary">Entrar</button>
         </div>
         <p id="loginError" class="error" style="display:none">Contraseña incorrecta</p>
       </div>
     </div>
 
-    <section id="adminSection" class="admin-section hidden">
+    <!-- Admin section (hidden by default) -->
+    <section id="adminSection" class="admin-section hidden" aria-hidden="true">
       <h2>Modo administrador</h2>
-      <form id="formAddTeam">
-        <label>Nombre del equipo<input id="teamName"></label>
-        <label>Club/Ciudad<input id="teamClub"></label>
-        <label>Categorías<input id="teamCategories"></label>
-        <label>Foto<input id="teamPhoto" type="file" accept="image/*"></label>
-        <div id="photoPreviewContainer" style="display:none">
-          <img id="photoPreview" style="max-width:150px;">
+
+      <form id="formAddTeam" class="admin-form">
+        <div class="form-row">
+          <label>Nombre del equipo
+            <input id="teamName" type="text" required placeholder="Ej: Plasencia HB">
+          </label>
         </div>
+        <div class="form-row">
+          <label>Club / Ciudad
+            <input id="teamClub" type="text" placeholder="Plasencia">
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Categorías (separadas por coma)
+            <input id="teamCategories" type="text" placeholder="alevín masculino, juvenil femenino">
+          </label>
+        </div>
+        <div class="form-row">
+          <label>Foto del equipo (opcional)
+            <input id="teamPhoto" type="file" accept="image/*" capture="environment">
+          </label>
+        </div>
+
+        <div id="photoPreviewContainer" class="photo-preview hidden">
+          <p>Previsualización:</p>
+          <img id="photoPreview" alt="Preview">
+        </div>
+
         <div class="form-actions">
-          <button type="submit">Guardar equipo</button>
+          <button type="button" id="cancelAddTeam" class="btn-ghost">Cancelar</button>
+          <button type="submit" id="saveTeam" class="btn-primary">Guardar equipo</button>
         </div>
       </form>
     </section>
+
   </main>
 
   <script src="app.js"></script>
