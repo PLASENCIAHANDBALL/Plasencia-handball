@@ -1,18 +1,14 @@
-# Plasencia Handball - App completa
+# Plasencia Handball - Static version
 
-Este paquete contiene la app completa lista para subir a GitHub y desplegar en GitHub Pages.
+Este paquete contiene una versión *simple* y estática (sin compilación) de la app para usar con GitHub Pages.
+Arquivos incluidos: `index.html`, `styles.css`, `app.js`.
 
-## Contraseña admin por defecto
+## Cómo usar
+1. Subir estos archivos a la raíz de tu repo en la rama `main`.
+2. En GitHub → Settings → Pages → Source: **main / (root)**.
+3. Esperar ~1 min y abrir: `https://<tu_usuario>.github.io/<tu_repositorio>/`
+
+### Contraseña admin (demo)
 `PHB-2025!Porterias&Redes#98`
 
-## Pasos para subir a GitHub
-
-1. Descarga y descomprime la carpeta.
-2. Entra en tu repo: https://github.com/PLASENCIAHANDBALL/Plasencia-handball
-3. Pulsa **Add file → Upload files**.
-4. Arrastra **todo el contenido de la carpeta** (los archivos y subcarpetas directamente).
-5. Asegúrate de que la rama seleccionada es `main` y pulsa **Commit changes**.
-6. Ve a **Actions** y espera a que el flujo **Deploy to GitHub Pages** termine en verde.
-7. Tu página pública estará en: `https://plasenciahandball.github.io/Plasencia-handball/`
-
-Si tienes algún error en Actions, copia las últimas líneas del log y pégalas en el chat para que te ayude a corregirlas.
+Los datos se guardan en `localStorage` del navegador (clave `plasencia_hb_data_v1`).

@@ -1,2 +1,79 @@
-<!DOCTYPE html><html><head><link rel="stylesheet" href="styles.css"></head>
-<body><h1>Plasencia Handball</h1><div id="app"></div><script src="./app.js"></script></body></html>
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Plasencia Handball · Gestión</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">Plasencia Handball · Gestión rápida</div>
+  <nav>
+    <button id="btnEquipos" class="navbtn">Equipos</button>
+    <button id="btnPodio" class="navbtn">Podio</button>
+    <button id="btnDirectos" class="navbtn">Directos</button>
+    <button id="btnAdmin" class="navbtn">Entrar Admin</button>
+  </nav>
+</header>
+
+<main id="app" class="container">
+  <section id="home" class="card">
+    <h2>Bienvenido</h2>
+    <p>Usa los botones de arriba para navegar. Datos guardados localmente en tu navegador.</p>
+  </section>
+
+  <section id="viewEquipos" class="card hidden">
+    <h2>Equipos</h2>
+    <div id="teamsList"></div>
+    <div id="teamFormWrap" class="hidden">
+      <h3>Añadir equipo</h3>
+      <input id="teamName" placeholder="Nombre equipo" />
+      <select id="teamCategory">
+        <option value="">Selecciona categoría</option>
+      </select>
+      <input id="teamClub" placeholder="Club / Ciudad" />
+      <textarea id="teamNotes" placeholder="Notas"></textarea>
+      <div><button id="addTeamBtn">Añadir equipo</button></div>
+    </div>
+  </section>
+
+  <section id="viewPodio" class="card hidden">
+    <h2>Podio / Clasificación</h2>
+    <div id="standings"></div>
+  </section>
+
+  <section id="viewDirectos" class="card hidden">
+    <h2>Directos</h2>
+    <div id="streamsList"></div>
+  </section>
+
+  <section id="adminModal" class="modal hidden">
+    <div class="modal-content">
+      <h3>Entrar en modo administrador</h3>
+      <input id="adminPass" type="password" placeholder="Contraseña admin" />
+      <div class="row">
+        <button id="loginBtn">Entrar</button>
+        <button id="closeAdminBtn">Cancelar</button>
+      </div>
+      <p class="hint">Contraseña por defecto: <code>PHB-2025!Porterias&Redes#98</code></p>
+    </div>
+  </section>
+
+  <section id="adminPanel" class="card hidden">
+    <h2>Panel administrador</h2>
+    <div class="row">
+      <button id="toggleAddTeam">Mostrar / Ocultar formulario añadir equipo</button>
+      <button id="exportBtn">Exportar JSON</button>
+      <button id="importBtn">Importar JSON</button>
+      <input id="importFile" type="file" accept="application/json" class="hidden"/>
+      <button id="logoutBtn">Salir Admin</button>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">Hecho con ❤️ — Datos guardados en localStorage</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
