@@ -206,7 +206,9 @@ export default function TournamentApp() {
   return (
     <div className="relative min-h-screen overflow-hidden">
       <BackgroundArt />
-      <div className="relative z-10 p-4 md:p-8">
+       <div className="relative z-10 p-4 md:p-8">
+        <div className="mx-auto w-full max-w-6xl">
+         {/* contenido actual sigue aquí — NO eliminar */}
         <header className="flex flex-col md:flex-row gap-4 md:items-center md:justify-between">
           <motion.h1 initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="text-3xl md:text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 to-sky-700 drop-shadow-sm">Plasencia Handball · Gestión rápida</motion.h1>
           <div className="flex gap-2 items-center">
@@ -474,16 +476,17 @@ export default function TournamentApp() {
               </div>
             </TabsContent>
           </Tabs>
-        </main>
+         </main>
 
         <footer className="mt-8 text-center text-xs text-slate-200 drop-shadow">Hecho con ❤️ para torneos de balonmano. Datos guardados localmente.</footer>
 
         {/* Panel de pruebas (solo admin) */}
         {isAdmin && <DevTests teams={teams} matches={matches} />}
-      </div>
+      </div>  {/* <-- cierra mx-auto */}
     </div>
   );
 }
+
 
 /* ===== Subcomponentes (TeamForm, TeamChip, TeamInline, MatchForm, TeamOptions, MatchesTable, GroupsView, StreamEmbed, Standings, PhaseManager, EventManager, PasswordChanger, BackgroundArt, DevTests) ===== */
 /* 
