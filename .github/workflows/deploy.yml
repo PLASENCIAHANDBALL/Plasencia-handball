@@ -2,8 +2,7 @@ name: Build and deploy to GitHub Pages
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
 
 permissions:
   contents: read
@@ -25,20 +24,24 @@ jobs:
 
       - name: Install dependencies (try ci, fallback to install)
         run: |
-          # intentamos la instalación estricta (rápida si tienes lockfile correcto)
+          set -e
           npm ci || npm install --legacy-peer-deps
 
-      - name: Build project
+      - name: Build
         run: npm run build
 
-      - name: Upload artifact (Pages)
-        uses: actions/upload-pages-artifact@v3
+      - name: Verify dist folder
+        run: |
+          if [ ! -d "./dist" ]; then
+            echo "ERROR: folder ./dist not found. Build output should be in ./dist"
+            ls -la
+            exit 1
+          fi
+
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v1
         with:
           path: ./dist
 
-  deploy:
-    needs: build-and-deploy
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
