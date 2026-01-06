@@ -1,4 +1,3 @@
-import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 
 export default function App() {
@@ -7,15 +6,15 @@ export default function App() {
       <Text style={styles.title}>Torneo de Balonmano</Text>
 
       <TouchableOpacity style={styles.card}>
-        <Text style={styles.cardTitle}>Noticias</Text>
+        <Text style={styles.cardText}>Partidos</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.card}>
-        <Text style={styles.cardTitle}>Competiciones</Text>
+        <Text style={styles.cardText}>Clasificación</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.card}>
-        <Text style={styles.cardTitle}>Favoritos</Text>
+        <Text style={styles.cardText}>Grupos</Text>
       </TouchableOpacity>
     </View>
   );
@@ -25,26 +24,26 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#c4161c',
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 20
+    padding: 20,
+    justifyContent: 'center'
   },
   title: {
-    fontSize: 28,
     color: '#fff',
+    fontSize: 28,
+    textAlign: 'center',
     marginBottom: 30,
     fontWeight: 'bold'
   },
   card: {
     backgroundColor: '#fff',
-    width: '100%',
     padding: 20,
     borderRadius: 12,
     marginBottom: 15
   },
-  cardTitle: {
-    fontSize: 18,
+  cardText: {
     color: '#c4161c',
-    fontWeight: '600'
+    fontSize: 18,
+    fontWeight: '600',
+    textAlign: 'center'
   }
 });
